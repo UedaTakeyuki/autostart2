@@ -46,7 +46,7 @@ Execute **autostart** command in **autostart2** folder as follow:
 ./autostart2 --on ../foo
 
 ```
-As the effect, /foo/foo.service unit file will be create and start it.
+As the result, /foo/foo.service unit file will be create and start it.
 
 - on: 
   Link unit file to /etc/systemd/system folder, then **enable** and **start** the service

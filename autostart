@@ -35,10 +35,10 @@ usage_exit(){
 write(){
   # create systemctl unit file if not exist
   if [ ! -f ${CMD}.service ]; then
-    if [ -e makeunitfile.sh ]; then
-      ./makeunitfile.sh
+    if [ -e makeunitfile ]; then
+      ./makeunitfile
     else
-      echo "No makeunitfile.sh !"
+      echo "No makeunitfile !"
       exit 1
     fi
   fi
@@ -59,10 +59,6 @@ off(){
 
 status(){
   sudo systemctl status ${CMD}.service
-}
-
-makeunit(){
-  echo けろけろ
 }
 
 while getopts ":-:" OPT

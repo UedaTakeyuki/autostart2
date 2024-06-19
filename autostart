@@ -13,17 +13,52 @@
 #
 VERSION=1.0.0
 
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
-REAL_DIR=$(dirname $(realpath $0))
-CMD=$(basename -z $SCRIPT_DIR | sed 's/\x0//g')
+# Parse command line option
+while getopts ":-:" OPT
+do
+  case $OPT in
+    -)
+				case "${OPTARG}" in
+					on)
+								command=on
+								;;
+					off)
+								command=off
+								;;
+					status)
+								command=status
+								;;
+					version)
+								command=version
+								;;
+					write)
+								command=write
+								;;
+				esac
+				;;
+    \?) command=usage_exit
+        ;;
+  esac
+done
 
+# get non option parameter
+shift `expr "${OPTIND}" - 1`
+
+if [ $# -eq 0 ]; then
+  TARGET_DIR=$(cd $(dirname $0); pwd)
+else
+  TARGET_DIR=$(realpath $1)
+fi
+
+CMD=$(basename -z $TARGET_DIR | sed 's/\x0//g')
+UNITFILE=${TARGET_DIR}/${CMD}.service
 
 version() {
   echo "Version: " ${VERSION} 1>&2
 }
 
 usage_exit(){
-  echo "Usage: $0 [--on]/[--off]" 1>&2
+  echo "Usage: $0 [option] [Target path(current path if ommited)]" 1>&2
   echo "  [--on]:               Set autostart as ON. " 			1>&2
   echo "  [--off]:              Set autostart as OFF. " 		1>&2
   echo "  [--status]:           Show current status. " 		 	1>&2
@@ -34,9 +69,9 @@ usage_exit(){
 
 write(){
   # create systemctl unit file if not exist
-  if [ ! -f ${CMD}.service ]; then
+  if [ ! -f ${UNITFILE} ]; then
     if [ -e makeunitfile ]; then
-      ./makeunitfile
+      ./makeunitfile ${TARGET_DIR}
     else
       echo "No makeunitfile !"
       exit 1
@@ -46,7 +81,7 @@ write(){
 
 on(){
   write
-  sudo ln -s ${SCRIPT_DIR}\/${CMD}.service /etc/systemd/system/${CMD}.service
+  sudo ln -s ${TARGET_DIR}\/${CMD}.service /etc/systemd/system/${CMD}.service
   sudo systemctl daemon-reload
   sudo systemctl enable ${CMD}.service
   sudo systemctl start ${CMD}.service
@@ -61,29 +96,30 @@ status(){
   sudo systemctl status ${CMD}.service
 }
 
-while getopts ":-:" OPT
-do
-  case $OPT in
-    -)
-				case "${OPTARG}" in
-					on)
-								on
-								;;
-					off)
-								off
-								;;
-					status)
-								status
-								;;
-					version)
-								version
-								;;
-					write)
-								write
-								;;
-				esac
-				;;
-    \?) usage_exit
-        ;;
-  esac
-done
+# Execute command
+case ${command} in
+  on)
+      on
+      exit 1
+      ;;
+  off)
+      off
+      exit 1
+      ;;
+  status)
+      status
+      exit 1
+      ;;
+  version)
+      version
+      exit 1
+      ;;
+  write)
+      write
+      exit 1
+      ;;
+  usage_exit)
+      usage_exit
+      exit 1
+      ;;
+esac

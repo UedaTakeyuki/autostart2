@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [ $# -eq 0 ]; then
-  SCRIPT_DIR=$(cd $(dirname $0); pwd)
+  TARGET_DIR=$(cd $(dirname $0); pwd)
 else
-  SCRIPT_DIR=$(realpath $1)
+  TARGET_DIR=$(realpath $1)
 fi
-CMD=$(basename -z $SCRIPT_DIR | sed 's/\x0//g')
-UNITFILE=${SCRIPT_DIR}/${CMD}.service
+CMD=$(basename -z $TARGET_DIR | sed 's/\x0//g')
+UNITFILE=${TARGET_DIR}/${CMD}.service
 
 # default [Unit] section
 set_default_unit(){
@@ -22,8 +22,8 @@ write_unit(){
 
 # default [Service] section
 set_default_service(){
-  WorkingDirectory=${SCRIPT_DIR}
-  ExecStart=${SCRIPT_DIR}/${CMD}
+  WorkingDirectory=${TARGET_DIR}
+  ExecStart=${TARGET_DIR}/${CMD}
   Restart=always
   RestartSec=30
   Type=simple
@@ -55,20 +55,20 @@ set_default_service
 set_default_install
 
 # replace default
-if [ -e ${SCRIPT_DIR}/replaceoptions.sh ]; then
-  source ${SCRIPT_DIR}/replaceoptions.sh
+if [ -e ${TARGET_DIR}/replaceoptions.sh ]; then
+  source ${TARGET_DIR}/replaceoptions.sh
 fi
 
 # write sections
 write_unit
-if [ -e ${SCRIPT_DIR}/add_to_unit_section.sh ]; then
-  ${SCRIPT_DIR}/add_to_unit_section.sh >> $UNITFILE
+if [ -e ${TARGET_DIR}/add_to_unit_section.sh ]; then
+  ${TARGET_DIR}/add_to_unit_section.sh >> $UNITFILE
 fi
 write_service
-if [ -e ${SCRIPT_DIR}/add_to_service_section.sh ]; then
-  ${SCRIPT_DIR}/add_to_service_section.sh >> $UNITFILE
+if [ -e ${TARGET_DIR}/add_to_service_section.sh ]; then
+  ${TARGET_DIR}/add_to_service_section.sh >> $UNITFILE
 fi
 write_install
-if [ -e ${SCRIPT_DIR}/add_to_install_section.sh ]; then
-  ${SCRIPT_DIR}/set_default_install.sh >> $UNITFILE
+if [ -e ${TARGET_DIR}/add_to_install_section.sh ]; then
+  ${TARGET_DIR}/set_default_install.sh >> $UNITFILE
 fi

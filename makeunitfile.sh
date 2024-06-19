@@ -56,5 +56,14 @@ fi
 
 # write sections
 write_unit
+if [ -e add_to_unit_section.sh ]; then
+  $(./add_to_unit_section.sh) >> $UNITFILE
+fi
 write_service
+if [ -e add_to_service_section.sh ]; then
+  ./add_to_service_section.sh >> $UNITFILE
+fi
 write_install
+if [ -e add_to_install_section.sh ]; then
+  $(./set_default_install.sh) >> $UNITFILE
+fi

@@ -20,7 +20,7 @@ Recognize command to start from folder name, and make systemctl unit file.
 
 
 ## install
-Copy ```autostart``` and ```makeunitfile.sh``` files in your project.
+Just **copy** ```autostart``` and ```makeunitfile.sh``` files in your project, **that's it!**
 
 ## how to use
 ```
@@ -33,17 +33,23 @@ Usage: ./autostart [--on]/[--off]
 ```
 
 - on: 
-  Link unit file to /etc/systemd/system folder and issue both **enable** and **start**
+  Link unit file to /etc/systemd/system folder, then **enable** and **start** the service
   
   1. Link systemd unit file (Automatically created in this folder if not exist) to /etc/systemd/system/.
   2. systemctl daemon-reload
   3. systemctl enable
   4. systemctl start
  
-- off:  
+- off:
+  **Stop** and **disable** the service
+  
   1. systemctl stop
   2. systemctl disable
-
+ 
+- status: 
+  Show status of the service
+  
+  1. systemctl statu
 
 ## history
 - v1.0.0: 2024.06.18 created by advancing of [autostart](https://github.com/UedaTakeyuki/autostart).

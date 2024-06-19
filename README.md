@@ -15,14 +15,14 @@ For example:
 
 ```
 
-## how does this works
+## How does this works
 Recognize command to start from folder name, and make systemctl unit file.
 
 
-## install
+## Install
 Just **copy** ```autostart``` and ```makeunitfile.sh``` files in your project, **that's it!**
 
-## how to use
+## How to use
 ```
 ./autostart -h
 Usage: ./autostart [--on]/[--off]
@@ -50,6 +50,9 @@ Usage: ./autostart [--on]/[--off]
   Show status of the service
   
   1. systemctl statu
+ 
+## How to customize auto-creation of systemd unit file in case default created is not appropriated.
+Refer wiki.
 
-## history
+## History
 - v1.0.0: 2024.06.18 created by advancing of [autostart](https://github.com/UedaTakeyuki/autostart).

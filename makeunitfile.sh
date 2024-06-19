@@ -5,10 +5,10 @@ UNITFILE=${SCRIPT_DIR}/${CMD}.service
 
 # default [Unit] section
 set_default_unit(){
-  Description="Get temp, humid, and humiditydeficit data \& Post to the monitor"
+  Description="Simple Unit file for "${CMD}"."
   After=rc-local.service
 }
-write_default_unit(){
+write_unit(){
   echo [Unit] > $UNITFILE
   echo Description=${Description} >> $UNITFILE
   echo After=${After} >> $UNITFILE
@@ -16,32 +16,45 @@ write_default_unit(){
 }
 
 # default [Service] section
-default_service(){
+set_default_service(){
+  WorkingDirectory=${SCRIPT_DIR}
+  ExecStart=${SCRIPT_DIR}/${CMD}
+  Restart=always
+  RestartSec=30
+  Type=simple
+  PIDFile=/var/run/${CMD}.pid
+}
+write_service(){
   echo [Service] >> $UNITFILE
-  echo WorkingDirectory=${SCRIPT_DIR} >> $UNITFILE
-  echo ExecStart=${SCRIPT_DIR}/${CMD} >> $UNITFILE
-  echo Restart=always >> $UNITFILE
-  echo RestartSec=30 >> $UNITFILE
-  echo Type=simple >> $UNITFILE
-  echo PIDFile=/var/run/${CMD}.pid >> $UNITFILE
+  echo WorkingDirectory=${WorkingDirectory} >> $UNITFILE
+  echo ExecStart=${ExecStart} >> $UNITFILE
+  echo Restart=${Restart} >> $UNITFILE
+  echo RestartSec=${RestartSec} >> $UNITFILE
+  echo Type=${Type} >> $UNITFILE
+  echo PIDFile=${PIDFile} >> $UNITFILE
   echo >> $UNITFILE
 }
 
+# default [Install] section
+set_default_install(){
+  WantedBy=multi-user.target
+}
+write_install(){
+  echo [Install] >> $UNITFILE
+  echo WantedBy=${WantedBy} >> $UNITFILE
+}
 
+# set defaults
 set_default_unit
+set_default_service
+set_default_install
 
 # replace default
 if [ -e replaceunit.sh ]; then
   source replaceunit.sh
 fi
 
-# [Unit] section
-write_default_unit
-
-# [Service] section
-default_service
-
-# [Install] section
-echo [Install] >> $UNITFILE
-echo WantedBy=multi-user.target >> $UNITFILE
-
+# write sections
+write_unit
+write_service
+write_install

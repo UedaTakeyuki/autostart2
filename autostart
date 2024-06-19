@@ -27,10 +27,11 @@ usage_exit(){
   echo "  [--off]:              Set autostart as OFF. " 		1>&2
   echo "  [--status]:           Show current status. " 		 	1>&2
   echo "  [--version]:          Show version. " 		 	      1>&2
+  echo "  [--write]:            Only write Unit file if not Exist. " 		1>&2
   exit 1
 }
 
-on(){
+write(){
   # create systemctl unit file if not exist
   if [ ! -f ${CMD}.service ]; then
     if [ -e makeunitfile.sh ]; then
@@ -40,10 +41,14 @@ on(){
       exit 1
     fi
   fi
-#  sudo ln -s ${SCRIPT_DIR}\/${CMD}.service /etc/systemd/system/${CMD}.service
-#  sudo systemctl daemon-reload
-#  sudo systemctl enable ${CMD}.service
-#  sudo systemctl start ${CMD}.service
+}
+
+on(){
+  write
+  sudo ln -s ${SCRIPT_DIR}\/${CMD}.service /etc/systemd/system/${CMD}.service
+  sudo systemctl daemon-reload
+  sudo systemctl enable ${CMD}.service
+  sudo systemctl start ${CMD}.service
 }
 
 off(){
@@ -75,6 +80,9 @@ do
 								;;
 					version)
 								version
+								;;
+					write)
+								write
 								;;
 				esac
 				;;

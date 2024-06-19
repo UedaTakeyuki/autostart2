@@ -36,20 +36,20 @@ Usage: ./autostart [--on]/[--off]
   Link unit file to /etc/systemd/system folder, then **enable** and **start** the service
   
   1. Link systemd unit file (Automatically created in this folder if not exist) to /etc/systemd/system/.
-  2. systemctl daemon-reload
-  3. systemctl enable
-  4. systemctl start
+  2. systemctl **daemon-reload**
+  3. systemctl **enable**
+  4. systemctl **start**
  
 - off:
   **Stop** and **disable** the service
   
-  1. systemctl stop
-  2. systemctl disable
+  1. systemctl **stop**
+  2. systemctl **disable**
  
 - status: 
   Show status of the service
   
-  1. systemctl statu
+  1. systemctl **statu**
  
 ## How to customize auto-creation of systemd unit file in case default created is not appropriated.
 Refer wiki.

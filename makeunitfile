@@ -1,5 +1,10 @@
 #!/bin/bash
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
+if [ $# -eq 0 ]; then
+  SCRIPT_DIR=$(cd $(dirname $0); pwd)
+else
+  SCRIPT_DIR=$(realpath $1)
+fi
 CMD=$(basename -z $SCRIPT_DIR | sed 's/\x0//g')
 UNITFILE=${SCRIPT_DIR}/${CMD}.service
 
@@ -50,20 +55,20 @@ set_default_service
 set_default_install
 
 # replace default
-if [ -e replaceoptions.sh ]; then
-  source replaceoptions.sh
+if [ -e ${SCRIPT_DIR}/replaceoptions.sh ]; then
+  source ${SCRIPT_DIR}/replaceoptions.sh
 fi
 
 # write sections
 write_unit
-if [ -e add_to_unit_section.sh ]; then
-  $(./add_to_unit_section.sh) >> $UNITFILE
+if [ -e ${SCRIPT_DIR}/add_to_unit_section.sh ]; then
+  ${SCRIPT_DIR}/add_to_unit_section.sh >> $UNITFILE
 fi
 write_service
-if [ -e add_to_service_section.sh ]; then
-  ./add_to_service_section.sh >> $UNITFILE
+if [ -e ${SCRIPT_DIR}/add_to_service_section.sh ]; then
+  ${SCRIPT_DIR}/add_to_service_section.sh >> $UNITFILE
 fi
 write_install
-if [ -e add_to_install_section.sh ]; then
-  $(./set_default_install.sh) >> $UNITFILE
+if [ -e ${SCRIPT_DIR}/add_to_install_section.sh ]; then
+  ${SCRIPT_DIR}/set_default_install.sh >> $UNITFILE
 fi

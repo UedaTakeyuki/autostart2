@@ -50,8 +50,8 @@ set_default_service
 set_default_install
 
 # replace default
-if [ -e replaceunit.sh ]; then
-  source replaceunit.sh
+if [ -e replaceoptions.sh ]; then
+  source replaceoptions.sh
 fi
 
 # write sections

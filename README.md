@@ -52,7 +52,7 @@ Usage: ./autostart [--on]/[--off]
   1. systemctl **statu**
  
 ## How to customize auto-creation of systemd unit file in case default created is not appropriated.
-Refer wiki.
+Refer [wiki](https://github.com/UedaTakeyuki/autostart2/wiki/Created-unit-file#how-to-customize).
 
 ## History
 - v1.0.0: 2024.06.18 created as successor of [autostart](https://github.com/UedaTakeyuki/autostart).

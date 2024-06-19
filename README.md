@@ -55,4 +55,4 @@ Usage: ./autostart [--on]/[--off]
 Refer wiki.
 
 ## History
-- v1.0.0: 2024.06.18 created by advancing of [autostart](https://github.com/UedaTakeyuki/autostart).
+- v1.0.0: 2024.06.18 created as successor of [autostart](https://github.com/UedaTakeyuki/autostart).

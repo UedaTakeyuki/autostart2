@@ -32,7 +32,7 @@ Usage: ./autostart [--on]/[--off]
   [--version]:          Show version.
 ```
 
-- on:
+- on: 
   Link unit file to /etc/systemd/system folder and issue both **enable** and **start**
   
   1. Link systemd unit file (Automatically created in this folder if not exist) to /etc/systemd/system/.

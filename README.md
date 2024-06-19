@@ -20,34 +20,30 @@ Recognize command to start from folder name, and make systemctl unit file.
 
 
 ## install
-Install this as ``submodule`` into your project as follow:
-
-```
-cd your-project-dir
-git submodule add https://github.com/UedaTakeyuki/autostart.git
-```
-
-## setup
-Call ``setup.sh`` to make symbolic links to your project as follow:
-
-```
-cd autostart
-./setup.sh
-```
-
-The following links must be created on your project
-
-- autostart.sh
+Copy ```autostart``` and ```makeunitfile.sh``` files in your project.
 
 ## how to use
 ```
-./autostart.sh -h
-Usage: ./autostart.sh [--on]/[--off]
+./autostart -h
+Usage: ./autostart [--on]/[--off]
   [--on]:               Set autostart as ON. 
   [--off]:              Set autostart as OFF. 
   [--status]:           Show current status. 
+  [--version]:          Show version.
 ```
 
+- on:
+  Link unit file to /etc/systemd/system folder and issue both **enable** and **start**
+  
+  1. Link systemd unit file (Automatically created in this folder if not exist) to /etc/systemd/system/.
+  2. systemctl daemon-reload
+  3. systemctl enable
+  4. systemctl start
+ 
+- off:  
+  1. systemctl stop
+  2. systemctl disable
+
+
 ## history
-- v1.0.0: 2021.06.04 extracted this feature from my other project
-- v1.1.0: 2021.07.03 first practical version, confirmed adaptation.
+- v1.0.0: 2024.06.18 created by advancing of [autostart](https://github.com/UedaTakeyuki/autostart).

@@ -1,0 +1,84 @@
+#!/bin/bash
+
+################################################################
+# 
+# Autostart setting
+# 
+# usage: ./autostart.sh --on/--off
+#
+#
+# @author Dr. Takeyuki UEDA
+# @copyright Copyright© Atelier UEDA 2018 - All rights reserved.
+#
+VERSION=1.0.0
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+REAL_DIR=$(dirname $(realpath $0))
+CMD=$(basename -z $SCRIPT_DIR | sed 's/\x0//g')
+
+
+version() {
+  echo "Version: " ${VERSION} 1>&2
+}
+
+usage_exit(){
+  echo "Usage: $0 [--on]/[--off]" 1>&2
+  echo "  [--on]:               Set autostart as ON. " 			1>&2
+  echo "  [--off]:              Set autostart as OFF. " 		1>&2
+  echo "  [--status]:           Show current status. " 		 	1>&2
+  echo "  [--version]:          Show version. " 		 	      1>&2
+  exit 1
+}
+
+on(){
+  # create systemctl unit file if not exist
+  if [ ! -f ${CMD}.service ]; then
+    if [ -e makeunitfile.sh ]; then
+      ./makeunitfile.sh
+    else
+      echo "No makeunitfile.sh !"
+      exit 1
+    fi
+  fi
+#  sudo ln -s ${SCRIPT_DIR}\/${CMD}.service /etc/systemd/system/${CMD}.service
+#  sudo systemctl daemon-reload
+#  sudo systemctl enable ${CMD}.service
+#  sudo systemctl start ${CMD}.service
+}
+
+off(){
+  sudo systemctl stop ${CMD}.service
+  sudo systemctl disable ${CMD}.service
+}
+
+status(){
+  sudo systemctl status ${CMD}.service
+}
+
+makeunit(){
+  echo けろけろ
+}
+
+while getopts ":-:" OPT
+do
+  case $OPT in
+    -)
+				case "${OPTARG}" in
+					on)
+								on
+								;;
+					off)
+								off
+								;;
+					status)
+								status
+								;;
+					version)
+								version
+								;;
+				esac
+				;;
+    \?) usage_exit
+        ;;
+  esac
+done

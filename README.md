@@ -24,13 +24,29 @@ Just **copy** ```autostart``` and ```makeunitfile.sh``` files in your project, *
 
 ## How to use
 ```
-./autostart -h
-Usage: ./autostart [--on]/[--off]
+Usage: ./autostart [option] [Target path(current path if ommited)]
   [--on]:               Set autostart as ON. 
   [--off]:              Set autostart as OFF. 
   [--status]:           Show current status. 
-  [--version]:          Show version.
+  [--version]:          Show version. 
+  [--write]:            Only write Unit file if not Exist. 
 ```
+Target path is the path of folder that the service is in, or current path if ommited.
+Fx: In the following folder structure
+```
+├───foo
+│    foo
+├───autostart2
+│    autostart
+```
+
+Execute **autostart** command in **autostart2** folder as follow:
+
+```
+./autostart2 --on ../foo
+
+```
+As the effect, /foo/foo.service unit file will be create and start it.
 
 - on: 
   Link unit file to /etc/systemd/system folder, then **enable** and **start** the service

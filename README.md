@@ -1,6 +1,10 @@
 # autostart2
 The ***autostart2*** provides the simplest way to make your application a **Systemd service** supported. All you have to do is only ```autostart --on```, this will do all the tedious work of making the appropriate unit file, linking it to the appropriate folder, daemon-reloading, enabling, and starting. For you with a lot of technical experience, these are just tedious tasks, but　it can be a nightmare for end users with no technical experience who are told by you to “configure and use it as the Systemd service.”　Instead, "do ```autostart --on```" would be a kind, easy, and helpful instruction even end users can execute well.
 
+## How does this work?
+Suppose you have a folder like [time](https://github.com/UedaTakeyuki/autostart2/tree/main/test/time) that has 2 executable files as [time](https://github.com/UedaTakeyuki/autostart2/blob/main/test/time/time) that has the same name as the folder, and [cl](https://github.com/UedaTakeyuki/autostart2/blob/main/test/time/cl) 
+judging from the name it is probably a client application.
+
 ## For what application?
 This is for application:
 

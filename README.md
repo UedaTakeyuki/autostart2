@@ -3,7 +3,9 @@ The ***autostart2*** provides the simplest way to make your application a **Syst
 
 ## How does this work?
 Suppose you have a folder like [time](https://github.com/UedaTakeyuki/autostart2/tree/main/test/time) that has 2 executable files as [time](https://github.com/UedaTakeyuki/autostart2/blob/main/test/time/time) that has the same name as the folder, and [cl](https://github.com/UedaTakeyuki/autostart2/blob/main/test/time/cl) 
-judging from the name it is probably a client application.
+judging from the name it is probably a client application. 
+
+Now let's make this time executable file a service. 
 
 ## For what application?
 This is for application:

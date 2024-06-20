@@ -1,5 +1,5 @@
 # autostart2
-The Simplest way to make your application as servce by addapting ``versatile systemctl unit file`` and providing ``useful command`` for system starting/stoping/status-checking.
+The ***autostart2*** provides the simplest way to make your application a **Systemd service**. All you have to do is only ```autostart --on```, this will do all the tedious work of making the appropriate unit file, linking it to the appropriate folder, daemon-reloading, enabling, and starting. For those of you with a lot of technical experience, this is just a tedious task, but　it can be a nightmare for end users with no technical experience and are told by you to “configure and use it as the Systemd service.”　Instead, "do ```autostart --on```" would be a kind, easy, and helpful instruction even end users can execute well.
 
 ## For what application?
 This is for application:

@@ -78,3 +78,4 @@ Refer [wiki](https://github.com/UedaTakeyuki/autostart2/wiki/Created-unit-file#h
 
 ## History
 - v1.0.0: 2024.06.18 created as successor of [autostart](https://github.com/UedaTakeyuki/autostart).
+- v1.1.0: 2024.06.23 incorporate **makeunitfile** into **autostart**

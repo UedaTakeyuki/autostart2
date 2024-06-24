@@ -54,13 +54,9 @@ Created symlink /etc/systemd/system/multi-user.target.wants/time.service → /ho
 
 This might be the easiest way to provide your product to end-users as a service.
 
-## For what application?
-This is for application:
-
-- started with calling single command file, in other words ``Type=simple``.
-- the name of the folder is the same as the command file name.
-
-For example:
+## How does the autostart make the systemd unit file?
+### 1. Executing file name.
+The autostart makes a unit file to ExecStart your app as ***Type=simple*** and guesses the name of the executing file as the same name as the name of the folder containing the executing file as follows.
 
 ```
 ├───foo
@@ -68,16 +64,21 @@ For example:
 
 ```
 
-## How does this works
-Recognize command to start from folder name, and make systemctl unit file.
+In case the executing file name is different from the folder name like as follows:
 
+```
+├───foo
+│    bar
+```
+
+You can specify it by making ```replaceoptions.sh``` script. For more detail, refer to the [wiki](https://github.com/UedaTakeyuki/autostart2/wiki/Created-unit-file#1-change-options-from-default-value)
 
 ## Install
 Just **copy** ```autostart``` and ```makeunitfile.sh``` files in your project, **that's it!**
 
 ## How to use
 ```
-Usage: ./autostart [option] [Target path(current path if ommited)]
+Usage: ./autostart [option] [Target path(current path if omitted)]
 # service handle options 
   [--on]:               Set autostart as ON. 
   [--off]:              Set autostart as OFF. 

@@ -71,7 +71,7 @@ In case the executing file name is different from the folder name like as follow
 │    bar
 ```
 
-You can specify it by making ```replaceoptions.sh``` script. For more detail, refer to the [wiki](https://github.com/UedaTakeyuki/autostart2/wiki/Created-unit-file#1-change-options-from-default-value)
+You can specify it by making ```replaceoptions.sh``` script. For more detail, refer to the [wiki](https://github.com/UedaTakeyuki/autostart2/wiki/Created-unit-file#1-change-options-from-default-value).
 
 ## Install
 Just **copy** ```autostart``` and ```makeunitfile.sh``` files in your project, **that's it!**

@@ -11,7 +11,7 @@
 # @copyright Copyright© Atelier UEDA 2018 - All rights reserved.
 # @repository https://github.com/UedaTakeyuki/autostart2
 #
-VERSION=1.1.0
+VERSION=1.1.1
 
 ################################################################
 #
@@ -37,6 +37,12 @@ do
 								;;
 					write)
 								command=write
+								;;
+					update)
+								command=update
+								;;
+					delete)
+								command=delete
 								;;
 				esac
 				;;
@@ -142,24 +148,33 @@ version() {
 
 usage_exit(){
   echo "Usage: $0 [option] [Target path(current path if ommited)]" 1>&2
+  echo "# service handle options " 1>&2
   echo "  [--on]:               Set autostart as ON. " 			1>&2
   echo "  [--off]:              Set autostart as OFF. " 		1>&2
   echo "  [--status]:           Show current status. " 		 	1>&2
-  echo "  [--version]:          Show version. " 		 	      1>&2
+  echo "# unit file options " 1>&2
   echo "  [--write]:            Only write Unit file if not Exist. " 		1>&2
+  echo "  [--update]:           Update Unit file if Exist, or create if not. " 		1>&2
+  echo "  [--delete]:           Delete Unit file if Exist. " 		1>&2
+  echo "# other options " 1>&2
+  echo "  [--version]:          Show version. " 		 	      1>&2
   exit 1
+}
+
+update(){
+  makeunitfile > $UNITFILE
 }
 
 write(){
   # create systemctl unit file if not exist
   if [ ! -f ${UNITFILE} ]; then
-#    if [ -e makeunitfile ]; then
-#      ./makeunitfile ${TARGET_DIR}
-      makeunitfile > $UNITFILE
-#    else
-#      echo "No makeunitfile !"
-#      exit 1
-#    fi
+    update
+  fi
+}
+
+delete(){
+  if [ -f ${UNITFILE} ]; then
+    unlink ${UNITFILE}
   fi
 }
 
@@ -200,6 +215,14 @@ case ${command} in
       ;;
   write)
       write
+      exit 1
+      ;;
+  update)
+      update
+      exit 1
+      ;;
+  delete)
+      delete
       exit 1
       ;;
   usage_exit)

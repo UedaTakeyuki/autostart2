@@ -147,7 +147,7 @@ version() {
 }
 
 usage_exit(){
-  echo "Usage: $0 [option] [Target path(current path if ommited)]" 1>&2
+  echo "Usage: $0 [option] [Target path(current path if omitted)]" 1>&2
   echo "# service handle options " 1>&2
   echo "  [--on]:               Set autostart as ON. " 			1>&2
   echo "  [--off]:              Set autostart as OFF. " 		1>&2

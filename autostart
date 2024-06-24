@@ -49,7 +49,8 @@ done
 shift `expr "${OPTIND}" - 1`
 
 if [ $# -eq 0 ]; then
-  TARGET_DIR=$(cd $(dirname $0); pwd)
+  # TARGET_DIR=$(cd $(dirname $0); pwd) # Path where the script file is in.
+  TARGET_DIR=$(pwd)
 else
   TARGET_DIR=$(realpath $1)
 fi

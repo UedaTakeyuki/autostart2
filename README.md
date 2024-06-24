@@ -5,7 +5,35 @@ The ***autostart2*** provides the simplest way to make your application a **Syst
 Suppose you have a folder like [time](https://github.com/UedaTakeyuki/autostart2/tree/main/test/time) that has 2 executable files as [time](https://github.com/UedaTakeyuki/autostart2/blob/main/test/time/time) that has the same name as the folder, and [cl](https://github.com/UedaTakeyuki/autostart2/blob/main/test/time/cl) 
 judging from the name it is probably a client application. 
 
-Now let's make this time executable file a service. 
+```
+/autostart2/test/time $ ls
+cl  time
+```
+
+Now let's make this time executable file a service. On ```autostart2``` folder, call ***autostart***
+
+```
+/autostart2 $ ./autostart --on test/time
+Created symlink /etc/systemd/system/multi-user.target.wants/time.service → /home/pi/github/autostart2/test/time/time.service.
+```
+
+Then, ```time.service``` unit file is created.
+
+```
+/autostart2/test/time $ ls
+cl  time  time.service
+```
+
+Also ```time``` service is started and enabled, so call ***cl***
+
+```
+/autostart2/test/time $ ./cl
+Mon 24 Jun 19:28:50 JST 2024
+
+```
+
+The time server returns to the client the current time. To stop ```cl```, cntl + c.
+
 
 ## For what application?
 This is for application:

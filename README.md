@@ -31,11 +31,16 @@ Just **copy** ```autostart``` and ```makeunitfile.sh``` files in your project, *
 ## How to use
 ```
 Usage: ./autostart [option] [Target path(current path if ommited)]
+# service handle options 
   [--on]:               Set autostart as ON. 
   [--off]:              Set autostart as OFF. 
   [--status]:           Show current status. 
-  [--version]:          Show version. 
+# unit file options 
   [--write]:            Only write Unit file if not Exist. 
+  [--update]:           Update Unit file if Exist, or create if not. 
+  [--delete]:           Delete Unit file if Exist. 
+# other options 
+  [--version]:          Show version.
 ```
 Target path is the path of folder that the service is in, or current path if ommited.
 Fx: In the following folder structure

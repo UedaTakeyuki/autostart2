@@ -37,6 +37,22 @@ Mon 24 Jun 19:28:50 JST 2024
 The time server returns to the client the current time. To stop ```cl```, cntl + c.
 
 ### 2. Call autostart on the path where the service is made from.
+In case you call autostart in the same folder as the file that you are making service, you can omit to specify the path. For example, link autostart into test/time folder symbolically as follow:
+
+```
+/autostart2/test/time $ ln -s ../../autostart
+/autostart2/test/time $ ls
+autostart  cl  time
+```
+
+Then, you can call **autostart** without specifying the path as follows.
+
+```
+/autostart2/test/time $ ./autostart --on
+Created symlink /etc/systemd/system/multi-user.target.wants/time.service → /home/pi/github/autostart2/test/time/time.service.
+```
+
+This might be the easiest way to provide your product to end-users as a service.
 
 ## For what application?
 This is for application:

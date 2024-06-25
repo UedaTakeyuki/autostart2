@@ -77,6 +77,16 @@ You can specify it by making ```replaceoptions.sh``` script. For more detail, re
 ExecStart=${TARGET_DIR}/bar
 ```
 
+### 2. restart always
+The options ```Restart``` and ```RestartSec``` are created as follow:
+
+```
+RestartSec=30
+Type=simple
+```
+
+The app launched as a service is monitored every 30 seconds and will be restarted automatically even if they are down.
+
 ## Install
 Just **copy** ```autostart``` and ```makeunitfile.sh``` files in your project, **that's it!**
 

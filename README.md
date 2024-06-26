@@ -63,6 +63,7 @@ The autostart makes a unit file to ExecStart your app as ***Type=simple*** and g
 │    foo
 
 ```
+This guessing is reasonable especially for ***golang*** that the name of created executable file by ```go build``` without ```-o``` option is the same of folder name.
 
 In case the executing file name is different from the folder name like as follows:
 

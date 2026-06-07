@@ -148,3 +148,4 @@ Refer [wiki](https://github.com/UedaTakeyuki/autostart2/wiki/Created-unit-file#h
 - v1.0.0: 2024.06.18 created as successor of [autostart](https://github.com/UedaTakeyuki/autostart).
 - v1.1.0: 2024.06.23 incorporate **makeunitfile** into **autostart**
 - v1.1.1: 2024.06.24 add --update, --delete
+- v1.2.1: 2026.06.07 add to support ExeOptions.txt file

@@ -83,7 +83,7 @@ set_default_unit(){
 }
 write_unit(){
   echo [Unit] #> $UNITFILE
-  echo Description=${Description} #>> $UNITFILE
+  echo "Description=${Description}" #>> $UNITFILE
   echo After=${After} #>> $UNITFILE
   echo #>> $UNITFILE
 }
@@ -98,8 +98,8 @@ set_default_service(){
 }
 write_service(){
   echo [Service] #>> $UNITFILE
-  echo WorkingDirectory=${WorkingDirectory} #>> $UNITFILE
-  echo ExecStart=${ExecStart} #>> $UNITFILE
+  echo WorkingDirectory="${WorkingDirectory}" #>> $UNITFILE
+  echo ExecStart="${ExecStart}" #>> $UNITFILE
   echo Restart=${Restart} #>> $UNITFILE
   echo RestartSec=${RestartSec} #>> $UNITFILE
   echo Type=${Type} #>> $UNITFILE

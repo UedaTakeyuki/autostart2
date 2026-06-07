@@ -78,7 +78,11 @@ You can specify it by making ```replaceoptions.sh``` script. For more detail, re
 ExecStart=${TARGET_DIR}/bar
 ```
 
-If the ```ExeOptions.txt``` file exists, it adds its contents as runtime options to ExecStart. For example, with the ```ExeOptions.txt``` file whic contents is ```--verbose```, generated ExecStart will be as follows:
+If the ```ExeOptions.txt``` file exists, it adds its contents as runtime options to ExecStart. For example, with the ```ExeOptions.txt``` file whic contents is as follow: 
+
+```--verbose``` 
+
+Then, a generated ExecStart will be as follows:
 
 ```
 ExecStart=/target/dir/bar --verbose

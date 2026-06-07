@@ -61,6 +61,13 @@ else
   TARGET_DIR=$(realpath $1)
 fi
 
+# read Execution options definition file
+EXEOPTIONSFILE=${TARGET_DIR}/ExeOptions.txt
+EXEOPTIONS=""
+if [ -f ${EXEOPTIONSFILE} ]; then
+  EXEOPTIONS=$(cat ${EXEOPTIONSFILE})
+fi
+
 CMD=$(basename -z $TARGET_DIR | sed 's/\x0//g')
 UNITFILE=${TARGET_DIR}/${CMD}.service
 
@@ -83,8 +90,7 @@ write_unit(){
 
 # default [Service] section
 set_default_service(){
-  WorkingDirectory=${TARGET_DIR}
-  ExecStart=${TARGET_DIR}/${CMD}
+  ExecStart="${TARGET_DIR}/${CMD} ${EXEOPTIONS}"
   Restart=always
   RestartSec=30
   Type=simple
@@ -119,6 +125,8 @@ makeunitfile(){
 
   # replace default
   if [ -e ${TARGET_DIR}/replaceoptions.sh ]; then
+    echo replaceoptions.sh
+    echo $(cat replaceoptions.sh)
     source ${TARGET_DIR}/replaceoptions.sh
   fi
 
